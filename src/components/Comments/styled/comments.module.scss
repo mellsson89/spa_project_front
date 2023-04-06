@@ -1,0 +1,38 @@
+.header_comment {
+  display: flex;
+  height: 50px;
+  background-color: aliceblue;
+  padding: 10px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 10px 0 10px;
+}
+
+.date {
+  font-size: 14px;
+  font-weight: normal;
+  margin-right: 10px;
+}
+
+.text {
+  margin-bottom: 20px;
+}
+
+.prevText {
+  margin-bottom: 15px;
+  position: relative;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &::before {
+    content: "";
+    margin-right: 5px;
+    border-left: 2px solid deepskyblue;
+    height: 18px;
+  }
+}
