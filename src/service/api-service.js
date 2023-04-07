@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL='http://localhost:5000/'
+axios.defaults.baseURL='http://3.95.250.104:5000'
 
 export const getAllComments = async (page=1, limit=25, key = 'createdAt', sort='DESC') => {
     try {
