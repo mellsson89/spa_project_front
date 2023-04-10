@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL='https://3.95.250.104:5000'
+axios.defaults.baseURL='https://backend-telegram-kappa.vercel.app'
 
 export const getAllComments = async (page=1, limit=25, key = 'createdAt', sort='DESC') => {
     try {
