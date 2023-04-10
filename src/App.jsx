@@ -25,9 +25,9 @@ function App() {
     const [key, setKey] = useState('createdAt');
 
 
-    socket.on("connect", () => {
-        console.log('Hello')
-    });
+    // socket.on("connect", () => {
+    //     console.log('Hello')
+    // });
 
     const handlerKey = async (e) => {
         const value = e.target.value;
