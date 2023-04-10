@@ -26,7 +26,7 @@ function App() {
 
 
     socket.on("connect", () => {
-        console.log(socket.id);
+        console.log('Hello')
     });
 
     const handlerKey = async (e) => {
