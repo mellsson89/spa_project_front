@@ -4,7 +4,6 @@ axios.defaults.baseURL='https://backend-telegram-kappa.vercel.app'
 
 export const getAllComments = async (page=1, limit=25, key = 'createdAt', sort='DESC') => {
     try {
-        console.log()
         const data = await axios.get(`/api/v1/comments?page=${page}&limit=${limit}&key=${key}&sort=${sort}`);
         return data;
     }
