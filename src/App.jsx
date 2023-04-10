@@ -57,11 +57,11 @@ function App() {
 
 
 
-    useEffect(() => {
-        socket.on('get-comment', (data) => {
-            setComments(data)
-        })
-    }, []);
+    // useEffect(() => {
+    //     socket.on('get-comment', (data) => {
+    //         setComments(data)
+    //     })
+    // }, []);
 
 
 
