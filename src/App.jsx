@@ -25,6 +25,13 @@ function App() {
     const [key, setKey] = useState('createdAt');
 
 
+    socket.on("connect_error", () => {
+        setTimeout(() => {
+            socket.connect();
+        }, 1000);
+    });
+
+
     const handlerKey = async (e) => {
         const value = e.target.value;
         setKey(value);
