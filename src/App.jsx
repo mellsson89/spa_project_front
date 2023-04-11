@@ -12,6 +12,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import {Context} from "./context";
+import {logDOM} from "@testing-library/react";
 
 function App() {
 
@@ -26,9 +27,7 @@ function App() {
 
 
     socket.on("connect_error", () => {
-        setTimeout(() => {
-            socket.connect();
-        }, 1000);
+        console.log('Error')
     });
 
 
