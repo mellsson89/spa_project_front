@@ -20,7 +20,7 @@ const Comments = ({comments}) => {
     const [prevText, setPrevText] = useState(null);
 
     const handleFile = async (urlFile) => {
-        const response = await fetch(`http://localhost:5000/${urlFile}`);
+        const response = await fetch(`https://spa-backend.pp.ua/${urlFile}`);
         const file = await response.blob();
         if(urlFile) {
             const reader = new FileReader();
@@ -69,7 +69,7 @@ const Comments = ({comments}) => {
                                     { img && <FsLightbox
                                         toggler={toggler}
                                         sources={[
-                                            `http://localhost:5000/${url_file}`
+                                            `https://spa-backend.pp.ua/${url_file}`
                                         ]}
                                     />}
                                     {home_page && <a href={home_page} title='Home Page' target='_blank'><LinkIcon fontSize="small"/></a> }
