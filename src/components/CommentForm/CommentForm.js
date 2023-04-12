@@ -19,6 +19,7 @@ import moment from "moment-timezone";
 import {AvatarGenerator}  from 'random-avatar-generator';
 import ModalFile from "../ModalFile";
 import TagPanel from "../TagPanel";
+import { RotatingLines } from  'react-loader-spinner'
 
 
 
@@ -35,6 +36,7 @@ const CommentForm = ({onClose, parentId = null, prevText}) => {
     const [urlFile, setUrlFile] = useState('');
     const [showModalFile, setShowModalFile] = useState(false);
     const [errorTags, setErrorTags] = useState(null);
+    const [spinner, setSpinner] = useState(false);
 
     const{name:nameWatch='',email:emailWatch='', text:textWatch='', homepage, upload='', captcha:captchaWatch} = comment;
 
@@ -134,8 +136,6 @@ const CommentForm = ({onClose, parentId = null, prevText}) => {
 
 
 
-
-
     const onSubmit =  async (data) => {
 
         const {name,email, homepage, text, upload} = data;
@@ -150,10 +150,10 @@ const CommentForm = ({onClose, parentId = null, prevText}) => {
                     parentId
                 }
 
-
-                await addComment(comment);
-            socket.emit('add-comment', options);
-            onClose();
+                setSpinner(true);
+                await addComment(comment);socket.emit('add-comment', options);
+                setSpinner(false);
+                onClose();
 
         }
 
@@ -177,8 +177,10 @@ const CommentForm = ({onClose, parentId = null, prevText}) => {
                         parentId
                     }
 
+                     setSpinner(true);
                      await addComment(comment);
                     socket.emit('add-comment', options);
+                    setSpinner(false);
                     onClose();
 
                 }
@@ -201,17 +203,15 @@ const CommentForm = ({onClose, parentId = null, prevText}) => {
                         parentId
                     }
 
+                    setSpinner(true);
                     await addComment(comment);
                     socket.emit('add-comment', options);
+                    setSpinner(false);
                     onClose();
 
                 }
-
             }
-
-
         }
-
     }
 
     const valid =(input) => {
@@ -340,9 +340,18 @@ const CommentForm = ({onClose, parentId = null, prevText}) => {
 
                 <div style={{textAlign:'center'}}>
                     <Button onClick={togglePrevView} disabled={!nameWatch || !textWatch || !emailWatch}>Предпросмотр</Button>
-                    <Button variant="contained" type='submit' endIcon={<SendIcon /> } disabled={Object.keys(errors).length > 0 || !nameWatch || !textWatch || !emailWatch || !captchaWatch ? true : false}>
+                    {!spinner && <Button variant="contained" type='submit' endIcon={<SendIcon /> } disabled={Object.keys(errors).length > 0 || !nameWatch || !textWatch || !emailWatch || !captchaWatch ? true : false}>
                         Добавить комментарий
-                    </Button>
+                    </Button>}
+                    <div>
+                        <RotatingLines
+                            strokeColor="grey"
+                            strokeWidth="5"
+                            animationDuration="0.75"
+                            width="35"
+                            visible={spinner}
+                        />
+                    </div>
                     <Drawer
                         anchor='top'
                         open={toggle}

@@ -12,7 +12,8 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import {Context} from "./context";
-import {logDOM} from "@testing-library/react";
+import { RotatingLines } from  'react-loader-spinner'
+
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
     const [limit, setLimit] = useState(25);
     const [sort, setSort] = useState('DESC');
     const [key, setKey] = useState('createdAt');
+    const [spinner, setSpinner] = useState(false);
 
 
     socket.on("connect_error", () => {
@@ -49,11 +51,14 @@ function App() {
 
     useEffect( () => {
         (async function () {
+            setSpinner(true);
             const {data} = await getAllComments(page,limit,key,sort);
             const {comments,nbPages, nbComments} = data;
             setNbPages(nbPages);
             setNbComments(nbComments);
             setComments(comments);
+            setSpinner(false);
+
         })()
     }, [key,limit,page,sort]);
 
@@ -101,6 +106,15 @@ function App() {
         </div>
           {showModal && <Modal onClose={toggleModal}><CommentForm  onClose={toggleModal} /></Modal>}
       </div>
+          <div className={styled.spinner}>
+              <RotatingLines
+                  strokeColor="grey"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  width="96"
+                  visible={spinner}
+              />
+          </div>
       </Context.Provider>
   );
 }

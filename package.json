@@ -20,6 +20,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.5",
+    "react-loader-spinner": "^5.3.4",
     "react-popupbox": "^2.0.9",
     "react-scripts": "5.0.1",
     "react-simple-captcha": "^9.0.2",
