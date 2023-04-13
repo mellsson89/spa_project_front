@@ -14,6 +14,7 @@ import CommentForm from "../CommentForm";
 const Comments = ({comments}) => {
     const [toggler, setToggler] = useState(false);
     const [fileRead, setFileRead] = useState('');
+    const [img, setImg] = useState(null);
     const [showModalFile, setShowModalFile] = useState(false);
     const [showModalForm, setShowModalForm] = useState(false);
     const [parentId, setParentId] = useState(null);
@@ -34,7 +35,12 @@ const Comments = ({comments}) => {
                 console.log(reader.error)
             }
         }
+    }
 
+    const openImg = (urlImg) => {
+        const img = `https://spa-backend.pp.ua/${urlImg}`;
+        setImg(img);
+        setToggler(!toggler)
     }
 
     const toggleModalFile = () => {
@@ -65,13 +71,7 @@ const Comments = ({comments}) => {
                                     <p className={styled.name}>{name}</p>
                                     <p className={styled.date}>{`${date} в ${time}`}</p>
                                     {file && <AttachmentIcon fontSize="small" sx={{cursor:'pointer', marginRight: home_page ? '10px' : 0}} onClick={() => handleFile(url_file)}/>}
-                                    {img && <PhotoIcon fontSize="small" sx={{cursor:'pointer', marginRight: home_page ? '10px' : 0}}  onClick={() => setToggler(!toggler)}/>}
-                                    { img && <FsLightbox
-                                        toggler={toggler}
-                                        sources={[
-                                            `https://spa-backend.pp.ua/${url_file}`
-                                        ]}
-                                    />}
+                                    {img && <PhotoIcon fontSize="small" sx={{cursor:'pointer', marginRight: home_page ? '10px' : 0}}  onClick={() => openImg(url_file)}/>}
                                     {home_page && <a href={home_page} title='Home Page' target='_blank'><LinkIcon fontSize="small"/></a> }
                                 </div>
                                 <div className={styled.text} >
@@ -96,6 +96,10 @@ const Comments = ({comments}) => {
 
             {showModalFile && fileRead && <ModalFile onClose={toggleModalFile}><p>{fileRead}</p></ModalFile>}
             {showModalForm && parentId && <Modal onClose={setShowModalForm}><CommentForm  onClose={setShowModalForm} parentId={parentId} prevText={prevText}/></Modal>}
+            <FsLightbox
+                toggler={toggler}
+                sources={[img]}
+            />
         </>
     );
 };
