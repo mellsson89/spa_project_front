@@ -38,12 +38,12 @@ const CommentForm = ({onClose, parentId = null, prevText}) => {
     const [errorTags, setErrorTags] = useState(null);
     const [spinner, setSpinner] = useState(false);
 
-    const{name:nameWatch='',email:emailWatch='', text:textWatch='', homepage, upload='', captcha:captchaWatch} = comment;
+    const{name:nameWatch='',email:emailWatch='', text:textWatch='', homepage=null, upload='', captcha:captchaWatch} = comment;
 
         const imgWatch = upload[0]?.type.split('/')[0] === 'image' ? true : false;
         const fileWatch = upload[0]?.type.split('/')[0] === 'text' ? true : false;
 
-    const { register, handleSubmit, watch, formState: { errors }, control} = useForm({
+    const { register, handleSubmit, watch, formState: { errors }} = useForm({
         mode: "onBlur",
         defaultValues:{
             homepage:null
@@ -139,6 +139,7 @@ const CommentForm = ({onClose, parentId = null, prevText}) => {
     const onSubmit =  async (data) => {
 
         const {name,email, homepage, text, upload} = data;
+        console.log(homepage)
 
         if(upload.length === 0) {
             const comment = {
