@@ -21,7 +21,7 @@ const Comments = ({comments}) => {
     const [prevText, setPrevText] = useState(null);
 
     const handleFile = async (urlFile) => {
-        const response = await fetch(`https://spa-backend.pp.ua/${urlFile}`);
+        const response = await fetch(`http://localhost:5000/${urlFile}`);
         const file = await response.blob();
         if(urlFile) {
             const reader = new FileReader();
@@ -38,7 +38,7 @@ const Comments = ({comments}) => {
     }
 
     const openImg = (urlImg) => {
-        const img = `https://spa-backend.pp.ua/${urlImg}`;
+        const img = `http://localhost:5000/${urlImg}`;
         setImg(img);
         setToggler(!toggler)
     }
